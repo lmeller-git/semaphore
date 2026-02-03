@@ -1,0 +1,29 @@
+[package]
+name = "semaphore"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[features]
+default = []
+std = []
+
+[dependencies]
+lock_api = "0.4.14"
+thiserror = { version = "2.0.18", default-features = false }
+
+[dev-dependencies]
+criterion = { version = "0.8.1", features = ["html_reports"] }
+
+[target.'cfg(loom)'.dependencies]
+loom = "0.7"
+
+[target.'cfg(shuttle)'.dependencies]
+shuttle = "0.8.1"
+
+[lints.rust]
+unexpected_cfgs = { level = "allow", check-cfg = ['cfg(loom)', 'cfg(shuttle)'] }
+
+[[bench]]
+name = "lock_benchmarks"
+harness = false
