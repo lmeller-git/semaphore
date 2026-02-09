@@ -33,8 +33,11 @@ pub mod locks {
 
     #[cfg(feature = "std")]
     pub use std_::*;
-    #[cfg(target_feature = "std")]
+    #[cfg(feature = "std")]
     mod std_ {
+        use super::*;
+        use crate::YieldWaiter;
+
         pub type Mutex<T> = GenericMutex<T, YieldWaiter>;
         pub type MutexGuard<'a, T> = GenericMutexGuard<'a, T, YieldWaiter>;
         pub type RwLock<T> = GenericRwLock<T, YieldWaiter>;

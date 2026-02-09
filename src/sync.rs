@@ -26,7 +26,6 @@ mod loom_ {
 
 #[cfg(any(not(test), all(not(loom), not(shuttle))))]
 mod core_ {
-    #[cfg(not(feature = "std"))]
     pub use core::hint;
     pub use core::sync::atomic;
 
